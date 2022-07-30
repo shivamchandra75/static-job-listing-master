@@ -1,4 +1,4 @@
-const data = [
+const dataArray = [
   {
     id: 1,
     company: "Photosnap",
@@ -150,4 +150,4 @@ const data = [
     tools: ["React", "Sass"],
   },
 ];
-export default data;
+export default dataArray;

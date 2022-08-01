@@ -1,5 +1,6 @@
 import React from "react";
 import dataArray from "../Data";
+import { motion } from "framer-motion";
 
 function FilteredDiv(props) {
   function FilterCrossBtn(props) {
@@ -73,69 +74,39 @@ function FilteredDiv(props) {
 
   const allCrossBtns = props.filteredArrBtns.map((element, index) => {
     return (
-      <FilterCrossBtn
-        text={element}
-        key={index}
-        setFilteredArrBtns={props.setFilteredArrBtns}
-        filteredArrBtns={props.filteredArrBtns}
-        setFilteredCard={props.setFilteredCard}
-      />
+      //Adding the animations here applies the animatoin only on the button that is added and not on all the buttons inside filterDiv
+      <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}>
+        <FilterCrossBtn
+          text={element}
+          key={index}
+          setFilteredArrBtns={props.setFilteredArrBtns}
+          filteredArrBtns={props.filteredArrBtns}
+          setFilteredCard={props.setFilteredCard}
+        />
+      </motion.div>
     );
   });
   return (
-    <div className="filter-div relative top-[-70px] mx-auto flex max-w-[85%] items-center justify-between rounded-xl bg-white p-4 px-8 lg:max-w-[85%]">
+    <motion.div
+      className="filter-div relative top-[-70px] mx-auto flex max-w-[85%] items-center justify-between rounded-xl bg-white p-4 px-8 lg:max-w-[85%]"
+      animate={{
+        y: 0,
+      }}
+      initial={{
+        y: -100,
+      }}
+    >
       <div className="flex flex-wrap gap-4 ">{allCrossBtns}</div>
       <div>
         <button
           onClick={(e) => resetFilter(e, props)}
-          className=" transition-all hover:underline hover:duration-300"
+          className=" hover:underline"
         >
           Clear
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
 export default FilteredDiv;
-
-//Recursive Function
-// function filteredArrayNew(arr, arr2, props) {
-//   if (arr.length === 0) return arr;
-//   const newArr = [];
-
-//   const checkValue = arr[0];
-//   for (let obj of arr2) {
-//     for (let key in obj) {
-//       if (typeof obj[key] !== typeof arr) {
-//         if (obj[key] === checkValue) {
-//           newArr.push(obj);
-//         }
-//       } else {
-//         for (let val of obj[key]) {
-//           if (val === checkValue) {
-//             newArr.push(obj);
-//           }
-//         }
-//       }
-//     }
-//   }
-//   arr.splice(0, 1);
-//   return newArr.concat(filteredArrayNew(arr, newArr, props));
-// }
-
-// for (let obj of arr) {
-//   for (let key in obj) {
-//     if (typeof obj[key] !== typeof arr) {
-//       if (obj[key] === checkValue) {
-//         newArr.push(obj);
-//       }
-//     } else {
-//       for (let val of obj[key]) {
-//         if (val === checkValue) {
-//           newArr.push(obj);
-//         }
-//       }
-//     }
-//   }
-// }

@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { motion } from "framer-motion";
 
 function FilterBtn(props) {
   const filterBtn = useRef(null);
@@ -45,17 +46,18 @@ function FilterBtn(props) {
   }
 
   return (
-    <button
+    <motion.button
       onClick={(e) => {
         props.setFilteredCard(filteredArray(e, props));
         props.setFilteredArrBtns(addFilteredBtns());
       }}
-      onTouchStart={(e) => props.setFilteredCard(filteredArray(e, props))}
       className="rounded-md bg-[#effafa] p-[0.5em] font-bold text-[#5ba4a4] transition hover:cursor-pointer hover:bg-[#5ba4a4] hover:text-white hover:duration-150"
       ref={filterBtn}
+      whileTap={{ scale: -0.2 }}
+      transition={{ duration: 0.1 }}
     >
       {props.text}
-    </button>
+    </motion.button>
   );
 }
 
